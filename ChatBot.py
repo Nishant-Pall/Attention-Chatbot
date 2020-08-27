@@ -107,3 +107,32 @@ for token in tokens:
 
 for token in tokens:
     answerswords2int[token] = len(answerswords2int) + 1
+
+# Creating the inverse dictionary of the answersword2int dictionary
+answersint2word = {w_i: w for w, w_i in answerswords2int.items()}
+
+# Adding EOS at the end of every answer
+for i in range(len(clean_answers)):
+    clean_answers[i] += " <EOS>"
+
+# Translating all the questions and the answers into integers
+# and Repalce all the words that were filtered out by <OUT>
+questions_into_int = []
+for question in clean_questions:
+    ints = []
+    for word in question.split():
+        if word not in questionswords2int:
+            ints.append(questionswords2int['<OUT>'])
+        else:
+            ints.append(questionswords2int[word])
+    questions_into_int.append(ints)
+
+answers_into_int = []
+for answer in clean_answers:
+    ints = []
+    for word in answer.split():
+        if word not in answerswords2int:
+            ints.append(answerswords2int['<OUT>'])
+        else:
+            ints.append(answerswords2int[word])
+    answers_into_int.append(ints)
