@@ -146,3 +146,8 @@ for length in range(1, 25+1):
         if len(i[1]) == length:
             sorted_clean_questions.append(questions_into_int[i[0]])
             sorted_clean_answers.append(answers_into_int[i[0]])
+
+
+################### BUILDING THE SEQ2SEQ MODEL ###################
+
+# Creating placeholders for inputs and the targets
